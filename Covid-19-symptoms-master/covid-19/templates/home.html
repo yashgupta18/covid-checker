@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html >
+<!--From https://codepen.io/frytyler/pen/EGdtg-->
+<head>
+  <meta content='width=device-width, initial-scale=1' name='viewport'/> 
+  <meta charset="UTF-8">
+  <title>Covid-19 Risk Estimator</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+ <!--  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'> -->
+  
+</head>
+
+<body>
+ <div class="bod">
+<h1>Covid-19 Tracker</h1>  
+
+ <div class="login">
+  <h1 style="font-family: 'Muli';color:white">Predict Your Covid-19 Risk</h1><hr style="width:35%">
+<p style="font-size:80%;color:white;font-family: 'Muli'">Hi! Our COVID-19 Risk estimator has been developed for estimating your Covid-19 Risk.<br> This interaction should not be taken as expert medical advice and should be crosschecked with your physician or online consultation.This API is built for creating awareness about the symptoms and precautions for covid 19. </p><br>
+    <form action="{{ url_for('predict')}}"method="post">
+    
+    <div class="box">
+    <fieldset style= "width :50%; background-color: white;box-shadow: 10pxpx 10pxpx 10pxpx 10px rgba(0, 0, 0, 0.3);font-family: 'Muli';border-radius: 15px 15px 15px 15px;font-size:120%">
+    
+    <!-- <legend> COVID-19</legend>  -->
+    <div class="detail">
+    <p style="font-size:100%">Enter your details</p>
+<hr>
+    <div>
+    <label for="age">Age</label> 
+    <input type="number" min="0" max="120" id="age" placeholder="Enter age" name="age" min="1",max="150" required> 
+    <br> <br>
+    </div>
+
+    <div>
+    <label for="gender">Gender</label> 
+    <select id="gender" name="gender"> 
+      <option value="0">Female</option> 
+      <option value="1">male</option> 
+    </select> 
+    <br> <br>
+    </div>
+    
+    <div>
+    <label for="body temperature">Body temperature in Fahrenheit</label> 
+    <input type="number" step="0.01" min="96" max="105" id="body temperature" placeholder="Enter temperature" style="width: 110px;" name="body temperature" min="96", max="105", step="0.1" required> 
+    <br> <br>
+    </div>
+    
+    <div>
+    <label for="Dry Cough">Dry Cough</label> 
+    <select id="Dry Cough" name="Dry Cough"> 
+      <option value="0">No</option> 
+      <option value="1">Yes</option> 
+    </select> 
+    <br> <br>
+    </div>
+
+    <div>
+    <label for="Loss of sense of smell">Loss of sense of smell</label> 
+    <select id="Loss of sense of smell" name="Loss of sense of smell"> 
+      <option value="0">No</option> 
+      <option value="1">Yes</option>   
+    </select> 
+    <br> <br>
+    </div>
+
+    <div>
+    <label for="sour throat">Sour throat</label> 
+    <select id="sour throat" name="sour throat"> 
+      <option value="0">No</option> 
+      <option value="1">Yes</option> 
+    </select> 
+    <br> <br>
+    </div>
+
+
+    <div>
+    <label for="weakness">Weakness</label> 
+    <select id="weakness" name="weakness"> 
+      <option value="0">No</option> 
+      <option value="1">Yes</option> 
+    </select> 
+    <br> <br>
+    </div>
+
+    <div>
+    <label for="change in appetide">Change in appetite</label> 
+    <select id="change in appetide" name="change in appetide"> 
+      <option value="0">No</option> 
+      <option value="1">Yes</option> 
+    </select> 
+    <br> <br>
+    </div>
+    
+    <div>
+    <label for="breathing problem">Breathing problem </label> 
+    <select id="breathing problem" name="breathing problem"> 
+      <option value="0">No</option> 
+      <option value="1">Yes</option> 
+    </select> 
+    <br><br> 
+    </div>
+
+    <div>
+    <label for="drowsiness">Drowsiness </label> 
+    <select id="drowsiness" name="drowsiness"> 
+      <option value="0">No</option> 
+      <option value="1">Yes</option> 
+    </select> 
+    <br><br> 
+    </div>
+    
+    <div>
+    <label for="pain in chest">Pain in chest </label> 
+    <select id="pain in chest" name="pain in chest"> 
+      <option value="0">No</option> 
+      <option value="1">Yes</option> 
+    </select> 
+    <br> <br>
+    </div>
+
+    <div>
+    <label for="travel history to infected countries">Travel history to infected countries or <br>close contact with infected person</label> 
+    <select id="travel history to infected countries" name="travel history to infected countries"> 
+      <option value="0">No</option> 
+      <option value="1">Yes</option> 
+    </select> 
+    <br> <br>
+    </div>
+    
+    <div>
+    <label for="diabetes">Diabetes</label> 
+    <select id="diabetes" name="diabetes"> 
+      <option value="0">No</option> 
+      <option value="1">Yes</option> 
+    </select> 
+    <br> <br>
+    </div>
+
+    <div>
+    <label for="high blood pressue">High blood pressue</label> 
+    <select id="high blood pressue" name="high blood pressue"> 
+      <option value="0">No</option> 
+      <option value="1">Yes</option> 
+    </select> 
+    <br> <br>
+    </div>
+    
+    <div>
+    <label for="heart disease">Heart disease</label> 
+    <select id="heart disease" name="heart disease"> 
+      <option value="0">No</option> 
+      <option value="1">Yes</option> 
+    </select> 
+    <br> <br>
+    </div>
+    
+    <div>
+    <label for="kidney disease">Kidney disease</label> 
+    <select id="kidney disease" name="kidney disease"> 
+      <option value="0">No</option> 
+      <option value="1">Yes</option> 
+    </select> 
+    <br> <br>
+    </div>
+
+    <div>
+    <label for="lung disease">Lung disease</label> 
+    <select id="lung disease" name="lung disease"> 
+      <option value="0">No</option> 
+      <option value="1">Yes</option> 
+    </select> 
+    <br><br> 
+    </div>
+   
+    <div>
+    <label for="stroke or reduced immunity">Stroke or reduced immunity</label> 
+    <select id="stroke or reduced immunity" name="stroke or reduced immunity"> 
+      <option value="0">No</option> 
+      <option value="1">Yes</option> 
+    </select> 
+    <br> <br>
+    </div>
+
+    <div>
+    <label for="symptoms progressed">Have the symptoms progressed?</label> 
+    <select id="symptoms progressed" name="symptoms progressed"> 
+      <option value="0">No</option> 
+      <option value="1">Yes</option> 
+    </select> 
+    <br><br>
+    </div>
+    
+    </div>
+    </fieldset> 
+<br>
+    <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
+    <button type="reset">Reset</button>
+    
+    </div>
+    </form>
+
+   <br>
+   <br><div style="color:white;font-size:100%;font-family:'Muli';width:50%;">
+   {{ prediction_text }}
+</div><hr style="width:50%">
+
+   
+
+
+   <pre style="font-size:90%;color:white;font-family: 'Muli';">
+
+    
+    Developed By:<br>Yash Gupta<br>
+    Contact at:<br>yashgupta2122@gmail.com
+
+   </pre> 
+
+
+
+  </div>
+
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src=".js/materialize.js"></script>
+<script src="js/init.js"></script>
+
+</center>
+</div>
+</body>
+</html>
